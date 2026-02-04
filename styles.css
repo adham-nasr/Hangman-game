@@ -7,7 +7,11 @@
 :root{
     --app_background: #E9F1FA;
     --cardBackground: white;
-    --selectionMenu_background : var(--app_background)
+    --selectionMenu_background : var(--app_background);
+    --game_background : var(--app_background);
+    --secondary:black;
+    --tertiary: green:
+
 }
 html{
     height: 100%;
@@ -110,4 +114,64 @@ body{
 .arrowButton img{
     width: 60px;
     height: 60px;
+}
+
+#game{
+    min-height:450px;
+    width:900px;
+    background-color: var(--game_background);
+    margin:50px;
+    position: relative;
+}
+#game .header h2{
+    color: var(--secondary);
+    text-align: center;
+}
+#score{
+    color: var(--secondary);
+    background-color: var(--tertiary);
+    position: absolute;
+    right: 10px;
+    top:0;
+    padding: 10px;
+}
+#lettersContainer{
+    min-width: 80%;
+    padding:4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.letterButton{
+    border: none;
+    width: 30px;
+    height: 30px;
+    background-color: black;
+    color: white;
+    margin: 10px 10px;
+}
+.letterButton:hover{
+    cursor: pointer;
+}
+
+#hangedMan{
+    min-height: 60vh;
+}
+.letterBox{
+    display: flex;
+    width: 40px;
+    height: 40px;
+    border: 4px solid black;
+    background-color: var(--app_background);
+    color: black;
+    justify-content: center;
+    align-items: center;
+}
+.letterBoxContainer{
+    margin-top: 30px;
+    display: flex;
+    margin: auto;
+    width: fit-content;
+
 }

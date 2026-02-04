@@ -11,6 +11,12 @@ var Screens={
     }
 }
 
+var letterStates = {
+    unpicked:"unpicked",
+    correct:"correct",
+    wrong:"wrong",
+}
+
 var db = {
     data:{},
     load: function(){
@@ -27,7 +33,188 @@ var db = {
     }
 }
 
+var selectionScreen = {
+    categories:[],
+    cat_obj:{},
+    per_page:3,
+    page:1,
+    load: function(){
+        this.page = 1;
+        this.categories = [];
+        this.cat_obj={};
+        console.log(db.data)
+        for(var category in db.data)
+        {
+            this.categories.push(category);
+            this.cat_obj[category] = {
+                "description":db.data[category].description,
+                "image" : db.data[category].image
+            }
+        }
+        this.render()
 
+    },
+    next: function(){
+        if(this.page*this.per_page<this.categories.length)   
+            this.page = this.page+1;     
+        this.render()
+    },
+    previous: function(){
+        if(this.page>1)
+            this.page = this.page-1;
+        this.render()
+    },
+    render(){
+        var cards = document.getElementById("cards");
+        var cardsList = ""
+        var total = this.categories.length;
+        var base = (this.page-1)*this.per_page + 1;
+        var end = Math.min(base+this.per_page-1,total);
+        for(var i=base;i<=end;i++)
+        {
+            var category_name = this.categories[i-1];
+            console.log(category_name)
+            cardsList += `
+            <div class="card" data-name="${category_name}">
+                <div class="imgcontainer">
+                    <img src="./assets/${this.cat_obj[category_name].image}" class="imgStyle" alt="${category_name}"/>
+                </div>
+            </div>
+        `
+        }
+        if(cardsList)
+            cards.innerHTML = cardsList;
+
+        var next = document.getElementById("nextButton");
+        var prev = document.getElementById("previousButton");
+
+        if(base===1)
+        {
+            prev.disabled=true;
+            prev.classList.add("hidden")
+
+        }
+        else
+        {
+            prev.disabled=false;
+            prev.classList.remove("hidden")
+
+        }
+        if(end===total)
+        {
+            next.disabled = true;
+            next.classList.add("hidden")
+        }
+        else
+        {
+            next.disabled = false;
+            next.classList.remove("hidden")
+
+        }
+
+    }
+}
+
+var game = {
+    category:"",
+    unsolved:[],
+    word:"",
+    letterOptions:{},
+    letterBoxes:[],
+    score:0,
+
+    
+    load: function(category){
+        this.category = category;
+        this.unsolved = structuredClone(db.data[category].words)
+        ///
+        this.word = "";
+        this.letterOptions = {};
+        this.letterBoxes = [];
+        this.roundRender()
+    },
+    roundRender: function()
+    {
+        var rand = Math.floor(Math.random()*this.unsolved.length)
+
+        this.word = this.unsolved[rand];
+        this.unsolved.splice(rand,1);
+        for(var i=65;i<=90;i++)
+            this.letterOptions[String.fromCharCode(i)]="unpicked";
+        for(var i=0;i<this.word.length;i++)
+            this.letterBoxes.push(``)
+
+                                
+
+        document.querySelector("#game .header h2").innerText = this.category;
+        document.querySelector("#score").innerText = this.score;
+        var letterBoxes_html = [];
+        this.letterBoxes.forEach(function(el){
+            letterBoxes_html.push(
+            `<span class="letterBox" data-value="${el}">${el}</span>`
+                                );
+        })
+        var letterOptions_html = [];
+        for(var i=65;i<=90;i++)
+        {
+            var temp = this.letterOptions[String.fromCharCode(i)]
+            if(temp===letterStates.unpicked)
+            {
+                letterOptions_html.push(
+                    `<button class="letterButton" data-value="${String.fromCharCode(i)}">${String.fromCharCode(i)}</button>`
+                )
+            }
+            else if(temp===letterStates.correct)
+            {
+                letterOptions_html.push(
+                    `<button class="letterButton correctPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
+                )
+            }
+            else
+            {
+                letterOptions_html.push(
+                    `<button class="letterButton wrongPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
+                )
+            }
+
+        }
+
+        document.querySelector('.letterBoxContainer').innerHTML=letterBoxes_html.join("")
+        document.querySelector('#lettersContainer').innerHTML=letterOptions_html.join("")
+
+    },
+    controller: function(pressedButton)
+    {
+        console.log(pressedButton)
+        if(this.letterOptions[pressedButton.dataset.value] !== letterStates.unpicked)
+            return;
+        if(this.word.toLowerCase().includes(pressedButton.dataset.value.toLowerCase()))
+            this.correctGuess(pressedButton);
+        else
+            this.wrongGuess(pressedButton);
+    },
+
+    correctGuess: function(pressedButton){
+        this.letterOptions[pressedButton.dataset.value] = letterStates.correct;
+        pressedButton.disabled=true;
+        pressedButton.classList.add('correct');
+
+        for(var i=0;i<this.word.length;i++)
+        {
+            if(this.word[i].toLowerCase() === pressedButton.dataset.value.toLowerCase())
+                this.letterBoxes[i] = pressedButton.dataset.value;
+        }
+
+        var letterBoxes_html = [];
+        this.letterBoxes.forEach(function(el){
+            letterBoxes_html.push(
+            `<span class="letterBox" data-value="${el}">${el}</span>`
+                                );
+        })
+        document.querySelector('.letterBoxContainer').innerHTML=letterBoxes_html.join("")
+
+    }
+}
 
 function isCard(targetEl)
 {
@@ -51,16 +238,6 @@ window.onload = function( ){
         Screens.switch(Screens.selectionMenu);
     })
 
-    var selection_cont = document.querySelector('.cardsContainer');
-    selection_cont.addEventListener('click',function(e){
-        console.log("hello")
-        e.preventDefault();
-        var targetEl = e.target;
-        if(isCard(targetEl))
-        {
-            /// getCard(targetEl)
-        }
-    })
 
     document.getElementById("nextButton").addEventListener('click',function(e){
         selectionScreen.next()
@@ -94,5 +271,19 @@ window.onload = function( ){
 
     document.getElementById("cards").addEventListener('click',function(e){
         e.preventDefault()
+        var targetEl = e.target;
+        if(isCard(targetEl))
+        {
+            game.load( getCard(targetEl).dataset.name);
+            Screens.switch(Screens.game);
+        }
+    })
+
+    document.getElementById("lettersContainer").addEventListener('click',function(e){
+        e.preventDefault();
+        var targetEl = e.target;
+        if(targetEl.tagName === "BUTTON")
+            game.controller(targetEl);
+        console.log(targetEl)
     })
 }
