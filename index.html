@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HangMan</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div id="startMenu" >
+            <h1>HangMan</h1>
+            <h2>Guess the word to save the hanging man</h2>
+            <button>Play</button>
+        </div>
+        <div id="selectionMenu" class="hide">
+            <h2>choose word category</h2>
+            <div class="cardsContainer">
+                <button id="previousButton" class="arrowButton"><img src="./assets/leftArrow.png"/></button>
+                <div id="cards">
+                </div>
+                <button id="nextButton"  class="arrowButton"><img src="./assets/rightArrow.png"/></button>
+            </div>
+            <p id="description"></p>
+        </div>
+        <div id="game" class="hide"></div>
+    </div>
+</body>
+</html>
