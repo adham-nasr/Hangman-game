@@ -175,3 +175,9 @@ body{
     width: fit-content;
 
 }
+.correctPick{
+    background-color: green;
+}
+.wrongPick{
+    background-color: red;
+}

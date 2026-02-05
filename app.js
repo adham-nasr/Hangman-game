@@ -122,6 +122,8 @@ var game = {
     letterOptions:{},
     letterBoxes:[],
     score:0,
+    mistakes:0,
+
 
     
     load: function(category){
@@ -129,12 +131,14 @@ var game = {
         this.unsolved = structuredClone(db.data[category].words)
         ///
         this.word = "";
-        this.letterOptions = {};
-        this.letterBoxes = [];
         this.roundRender()
     },
     roundRender: function()
     {
+        this.letterOptions = {};
+        this.letterBoxes = [];
+        this.mistakes=0;
+
         var rand = Math.floor(Math.random()*this.unsolved.length)
 
         this.word = this.unsolved[rand];
@@ -164,18 +168,18 @@ var game = {
                     `<button class="letterButton" data-value="${String.fromCharCode(i)}">${String.fromCharCode(i)}</button>`
                 )
             }
-            else if(temp===letterStates.correct)
-            {
-                letterOptions_html.push(
-                    `<button class="letterButton correctPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
-                )
-            }
-            else
-            {
-                letterOptions_html.push(
-                    `<button class="letterButton wrongPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
-                )
-            }
+            // else if(temp===letterStates.correct)
+            // {
+            //     letterOptions_html.push(
+            //         `<button class="letterButton correctPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
+            //     )
+            // }
+            // else
+            // {
+            //     letterOptions_html.push(
+            //         `<button class="letterButton wrongPick" data-value="${String.fromCharCode(i)}>${String.fromCharCode(i)}</button>`
+            //     )
+            // }
 
         }
 
@@ -185,7 +189,6 @@ var game = {
     },
     controller: function(pressedButton)
     {
-        console.log(pressedButton)
         if(this.letterOptions[pressedButton.dataset.value] !== letterStates.unpicked)
             return;
         if(this.word.toLowerCase().includes(pressedButton.dataset.value.toLowerCase()))
@@ -197,12 +200,16 @@ var game = {
     correctGuess: function(pressedButton){
         this.letterOptions[pressedButton.dataset.value] = letterStates.correct;
         pressedButton.disabled=true;
-        pressedButton.classList.add('correct');
+        pressedButton.classList.add('correctPick');
+        this.score+=5;
 
+        var done=0;
         for(var i=0;i<this.word.length;i++)
         {
             if(this.word[i].toLowerCase() === pressedButton.dataset.value.toLowerCase())
                 this.letterBoxes[i] = pressedButton.dataset.value;
+            if(this.letterBoxes[i])
+                done++;
         }
 
         var letterBoxes_html = [];
@@ -212,6 +219,29 @@ var game = {
                                 );
         })
         document.querySelector('.letterBoxContainer').innerHTML=letterBoxes_html.join("")
+        document.getElementById("score").innerText = this.score;
+
+        if(done===this.word.length)
+        {
+            console.log("done");
+            console.log(this.word.length);
+            console.log("win");
+            this.roundRender();
+        }
+
+    },
+    wrongGuess: function(pressedButton){
+        this.mistakes++;
+        this.letterOptions[pressedButton.dataset.value] = letterStates.correct;
+        pressedButton.disabled=true;
+        pressedButton.classList.add('wrongPick');
+        if(this.mistakes===6)
+        {
+            console.log("lose")
+            this.roundRender();
+        }
+        this.score-=1;
+        document.getElementById("score").innerText = this.score;
 
     }
 }
