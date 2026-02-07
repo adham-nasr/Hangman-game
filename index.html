@@ -9,6 +9,7 @@
 </head>
 <body>
     <div id="app">
+        <div id="backButton" class="hide"><img src="./assets/leftArrow.png"/></div>
         <div id="startMenu">
             <h1>HangMan</h1>
             <h2>Guess the word to save the hanging man</h2>
@@ -32,14 +33,38 @@
                 </div>
             </div>
             <div id="hangedMan">
-                <div class="imgcontainer">
-                    <img class="imgStyle" src="assets/Music.jpg"/>
-                </div>
+                <!-- <svg width="498" height="433" viewBox="0 0 498 533" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <line x1="63.5" y1="523" x2="63.5" y2="36" stroke="black" stroke-width="17"/>
+                    <line y1="21" x2="483" y2="21" stroke="black" stroke-width="30"/>
+                    <line x1="372.5" y1="20" x2="372.5" y2="151" stroke="black"/>
+                    <circle class="manPart hide" cx="372" cy="192" r="38" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" x1="375.711" y1="233.019" x2="374.711" y2="390.019" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 0.638717 -0.769441 -0.638717 371.711 393.303)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 -0.638717 -0.769441 0.638717 442.421 452)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 0.638717 -0.769441 -0.638717 372.421 274.598)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 -0.638717 -0.769441 0.638717 442.421 333.295)" stroke="black" stroke-width="6"/>
+                </svg> -->
+                <svg width="483" height="419" viewBox="0 0 483 519" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line x1="63.5" y1="519" x2="63.5" y2="32" stroke="black" stroke-width="17"/>
+                    <line y1="17" x2="483" y2="17" stroke="black" stroke-width="30"/>
+                    <line x1="372.5" y1="16" x2="372.5" y2="147" stroke="black"/>
+                    <circle class="manPart hide" cx="372" cy="188" r="38" transform="rotate(-90 372 188)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" x1="373" y1="229.019" x2="372" y2="386.019" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 0.638717 -0.769441 -0.638717 370 381)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(0.7694 0.638768 0.769483 -0.638667 375.289 381)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(-0.769441 0.638717 -0.769441 -0.638717 369.711 270.598)" stroke="black" stroke-width="6"/>
+                    <line class="manPart hide" y1="-3" x2="91.8987" y2="-3" transform="matrix(0.7694 0.638768 0.769483 -0.638667 375.289 271)" stroke="black" stroke-width="6"/>
+                </svg>
+
             </div>
             <div class="letterBoxContainer">
             </div>
             <div id="lettersContainer">
             </div>
+            <dialog>
+                <img>
+                <p></p>
+            </dialog>
         </div>
     </div>
 </body>

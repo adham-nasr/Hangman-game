@@ -1,7 +1,7 @@
 {
   "Animals": {
     "description": "Living creatures that are not plants or fungi",
-    "image": "Animals.jpg",
+    "image": "compressed/Animals.jpg",
     "words": [
       "Elephant",
       "Kangaroo",
@@ -27,7 +27,7 @@
   },
   "Countries": {
     "description": "Sovereign states with their own governments",
-    "image": "Countries.jpg",
+    "image": "compressed/Countries.jpg",
     "words": [
       "Australia",
       "Canada",
@@ -53,7 +53,7 @@
   },
   "Programming": {
     "description": "Computer science and software development terms",
-    "image": "Programming.jpg",
+    "image": "compressed/Programming.jpg",
     "words": [
       "Python",
       "JavaScript",
@@ -79,7 +79,7 @@
   },
   "Sports": {
     "description": "Physical activities and competitive games",
-    "image": "Sports.jpg",
+    "image": "compressed/Sports.jpg",
     "words": [
       "Basketball",
       "Football",
@@ -105,7 +105,7 @@
   },
   "Science": {
     "description": "Systematic study of the natural world",
-    "image": "Science.jpg",
+    "image": "compressed/Science.jpg",
     "words": [
       "Chemistry",
       "Biology",
@@ -131,7 +131,7 @@
   },
   "Music": {
     "description": "Art form of organized sound and rhythm",
-    "image": "Music.jpg",
+    "image": "compressed/Music.jpg",
     "words": [
       "Guitar",
       "Piano",
@@ -157,7 +157,7 @@
   },
   "Nature": {
     "description": "Natural world and environmental features",
-    "image": "Nature.jpg",
+    "image": "compressed/Nature.jpg",
     "words": [
       "Mountain",
       "Ocean",
@@ -183,7 +183,7 @@
   },
   "Food": {
     "description": "Edible substances consumed for nutrition",
-    "image": "Food.jpg",
+    "image": "compressed/Food.jpg",
     "words": [
       "Chocolate",
       "Avocado",
@@ -209,7 +209,7 @@
   },
   "Movies": {
     "description": "Motion pictures and cinematic works",
-    "image": "Movies.jpg",
+    "image": "compressed/Movies.jpg",
     "words": [
       "Avatar",
       "Titanic",
@@ -235,7 +235,7 @@
   },
   "Literature": {
     "description": "Written works and literary classics",
-    "image": "Literature.jpg",
+    "image": "compressed/Literature.jpg",
     "words": [
       "Shakespeare",
       "Hamlet",
@@ -261,7 +261,7 @@
   },
   "Transportation": {
     "description": "Vehicles and methods of moving people/goods",
-    "image": "Transportation.jpg",
+    "image": "compressed/Transportation.jpg",
     "words": [
       "Airplane",
       "Helicopter",
@@ -287,7 +287,7 @@
   },
   "Professions": {
     "description": "Occupations and career paths",
-    "image": "Professions.jpg",
+    "image": "compressed/Professions.jpg",
     "words": [
       "Doctor",
       "Teacher",

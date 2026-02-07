@@ -8,6 +8,10 @@ var Screens={
         document.getElementById(Screens.selectionMenu).classList.add('hide')
         document.getElementById(Screens.game).classList.add('hide')
         document.getElementById(targetScreen).classList.remove('hide')
+        if(targetScreen===Screens.startMenu)
+            document.getElementById("backButton").classList.add('hide');
+        else
+            document.getElementById("backButton").classList.remove('hide');
     }
 }
 
@@ -20,7 +24,6 @@ var letterStates = {
 var db = {
     data:{},
     load: function(){
-        console.log("DB")
         return fetch("http://localhost:5500/db.json")
         .then(function(res){
             console.log(res)
@@ -115,6 +118,22 @@ var selectionScreen = {
     }
 }
 
+var hangingMan = {
+    state:0,
+
+    draw: function()
+    {
+        document.querySelectorAll(".manPart")[this.state].classList.remove('hide')
+        this.state++;
+    },
+    reset: function(){
+        this.state=0;
+        document.querySelectorAll(".manPart").forEach(function(el){
+            el.classList.add('hide');
+        })
+    }
+}
+
 var game = {
     category:"",
     unsolved:[],
@@ -131,6 +150,7 @@ var game = {
         this.unsolved = structuredClone(db.data[category].words)
         ///
         this.word = "";
+        hangingMan.reset();
         this.roundRender()
     },
     roundRender: function()
@@ -138,6 +158,8 @@ var game = {
         this.letterOptions = {};
         this.letterBoxes = [];
         this.mistakes=0;
+        hangingMan.reset();
+
 
         var rand = Math.floor(Math.random()*this.unsolved.length)
 
@@ -226,23 +248,40 @@ var game = {
             console.log("done");
             console.log(this.word.length);
             console.log("win");
-            this.roundRender();
+            this.verdict("win");
         }
 
     },
     wrongGuess: function(pressedButton){
         this.mistakes++;
+        hangingMan.draw();
         this.letterOptions[pressedButton.dataset.value] = letterStates.correct;
         pressedButton.disabled=true;
         pressedButton.classList.add('wrongPick');
         if(this.mistakes===6)
         {
             console.log("lose")
-            this.roundRender();
+            this.verdict("loose");
         }
         this.score-=1;
         document.getElementById("score").innerText = this.score;
 
+    },
+
+    verdict: function(verd)
+    {
+        if(verd ==="win")
+            document.querySelector("dialog img").src="assets/check.png"
+        else
+            document.querySelector("dialog img").src="assets/wrong.png"
+
+        document.querySelector("dialog p").innerText=this.word;
+        document.querySelector("dialog").showModal()
+        setTimeout(function(){
+            document.querySelector("dialog").close()
+            // console.log(this);
+            game.roundRender()
+        },4000)
     }
 }
 
@@ -259,6 +298,8 @@ function getCard(targetEl)
 }
 window.onload = function( ){
     var Database = db.load()
+    var dialog = document.querySelector("dialog")
+
     document.querySelector('#startMenu button').addEventListener('click',function(e){
         console.log("CLICK")
         e.preventDefault();
@@ -315,5 +356,14 @@ window.onload = function( ){
         if(targetEl.tagName === "BUTTON")
             game.controller(targetEl);
         console.log(targetEl)
+    })
+
+    // document.getElementById("closingBtn").addEventListener('click',function(e){
+    //     e.preventDefault()
+    //     dialog.close();
+    // })
+
+    document.getElementById("backButton").addEventListener('click',function(e){
+        Screens.switch(Screens.startMenu);
     })
 }
