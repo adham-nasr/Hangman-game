@@ -36,6 +36,7 @@
     --neutralLight:#fafcfd;
     --dimmedsecondary:hsl(39, 35%, 70%);
     --lightsecondary: #f6c789;
+    --lightersecondary:hsl(34, 40%, 90%);
     --darksecondary: #482b05;
     --lightaccent: #7cbeca;
     --darkaccent: #4ba4b4;
@@ -242,9 +243,10 @@ dialog {
     padding: 60px;
     border: none;
     border-radius: 10px;
-    height: 65vh;
+    height: 60vh;
+    width: 30vw;
     opacity: 0;
-    background-color: var(--neutralLight);
+    background-color: var(--lightersecondary);
     animation: fadeInOut 4s ease-in forwards;
 
 }
@@ -253,8 +255,8 @@ dialog::backdrop{
     animation: fadeInOut 4s ease-in forwards;
 }
 dialog img{
-    width: 70%;
-    height: 70%;
+    width: 60%;
+    height: 60%;
     object-fit: contain;
     margin: auto;
     display: block;
