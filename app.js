@@ -150,6 +150,7 @@ var game = {
         this.unsolved = structuredClone(db.data[category].words)
         ///
         this.word = "";
+        this.score = 0;
         hangingMan.reset();
         this.roundRender()
     },

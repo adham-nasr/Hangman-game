@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 /* :root{
@@ -17,7 +18,7 @@
 
 } */
 
-:root{
+/* :root{
     --lightsecondary: #F5F0EB;
     --darksecondary: #2A282C;
     --lightaccent: #5FC03A;
@@ -27,6 +28,23 @@
     --cardBackground: var(--app_background);
     --selectionMenu_background : var(--app_background);
     --game_background : var(--lightsecondary);
+
+} */
+
+:root{
+    --neutralDark: #192f34;
+    --neutralLight:#fafcfd;
+    --dimmedsecondary:hsl(39, 35%, 70%);
+    --lightsecondary: #f6c789;
+    --darksecondary: #482b05;
+    --lightaccent: #7cbeca;
+    --darkaccent: #4ba4b4;
+    --primary: #053d48;
+    --lightprimary: #0d8fa6;
+    --app_background: var(--neutralDark);
+    --cardBackground: var(--app_background);
+    --selectionMenu_background : var(--app_background);
+    --game_background : var(--dimmedsecondary   );
 
 }
 
@@ -40,7 +58,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--darksecondary)
+    color: var(--lightsecondary)
 
 }
 #selectionMenu{
@@ -147,17 +165,19 @@
 
 }
 #game .header h2{
-    color: var(--secondary);
+    color: var(--darksecondary);
     text-align: center;
-    font-size: 30px;
+    font-size: 46px;
+    margin-bottom: 10px;
 }
 #score{
-    color: var(--secondary);
-    background-color: var(--tertiary);
+    color: var(--neutralDark);
     position: absolute;
     right: 10px;
-    top:0;
+    top:10px;
     padding: 10px;
+    font-size: 24px;
+    font-weight: 700;
 }
 #lettersContainer{
     min-width: 80%;
@@ -169,15 +189,16 @@
 
 .letterButton{
     border: none;
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
     background-color: var(--primary);
-    color: var(--darksecondary);
+    color: var(--lightsecondary);
     margin: 10px 10px;
-    font-size: 18px;
+    font-size: 20px;
 }
 .letterButton:hover{
     cursor: pointer;
+    background-color: var(--lightprimary);
 }
 
 #hangedMan{
@@ -188,12 +209,13 @@
     width: 40px;
     height: 40px;
     border: 4px solid var(--darksecondary);
-    background-color: var(--lightsecondary);
-    color: var(--darksecondary);
+    background-color: var(--neutralLight);
+    color: var(--neutralDark);
     justify-content: center;
     align-items: center;
     margin:0 4px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: 600;
 
 }
 .letterBoxContainer{
@@ -203,12 +225,15 @@
     width: fit-content;
 
 }
-.correctPick{
-    background-color:var(--lightaccent);
+.correctPick , .correctPick:hover{
+    background-color:hsl(120, 70%, 40%);
+    color: var(--neutralDark);
+    cursor:default;
 }
-.wrongPick{
-    background-color: var(--darkaccent);
-    color: var(--lightsecondary);
+.wrongPick, .wrongPick:hover{
+    background-color: hsl(0, 70%, 45%);
+    color: var(--neutralDark);
+    cursor:default;
 }
 
 
@@ -219,6 +244,7 @@ dialog {
     border-radius: 10px;
     height: 65vh;
     opacity: 0;
+    background-color: var(--neutralLight);
     animation: fadeInOut 4s ease-in forwards;
 
 }
@@ -284,23 +310,29 @@ dialog p{
     height:80px;
     border: 0;
     border-radius: 20px;
-    box-shadow: 0px 4px 10px hsl(0, 0%, 40%);
+    box-shadow: 0px 2px 4px hsl(0, 0%, 40%);
     margin: 80px auto;
     font-size: 20px;
     display: block;
-    background-color: var(--darksecondary);
-    color: var(--lightsecondary);
+    background-color: var(--lightaccent);
+    color: var(--darksecondary);
 }  
 #startMenu button:hover{
     cursor: pointer;
+    background-color: var(--darkaccent);
 }  
 
 #backButton{
     position: absolute;
     top:30px;
     left:60px;
-    width: 60px;
-    height:40px;
+    width: 70px;
+    height:70px;
+}
+#backButton img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .manPart{
