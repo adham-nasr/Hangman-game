@@ -4,10 +4,10 @@ var Screens={
     selectionMenu:"selectionMenu",
     game:"game",
     switch: function(targetScreen){
-        document.getElementById(Screens.startMenu).classList.add('hide')
-        document.getElementById(Screens.selectionMenu).classList.add('hide')
-        document.getElementById(Screens.game).classList.add('hide')
-        document.getElementById(targetScreen).classList.remove('hide')
+        document.getElementById(Screens.startMenu).classList.add('hide');
+        document.getElementById(Screens.selectionMenu).classList.add('hide');
+        document.getElementById(Screens.game).classList.add('hide');
+        document.getElementById(targetScreen).classList.remove('hide');
         if(targetScreen===Screens.startMenu)
             document.getElementById("backButton").classList.add('hide');
         else
